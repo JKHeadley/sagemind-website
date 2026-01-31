@@ -13,7 +13,10 @@ function getCalendarClient() {
 }
 
 // Configuration
-const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || "primary";
+const PRIMARY_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || "primary";
+const CALENDAR_IDS = process.env.GOOGLE_CALENDAR_IDS
+  ? process.env.GOOGLE_CALENDAR_IDS.split(",").map((id) => id.trim())
+  : [PRIMARY_CALENDAR_ID];
 const TIMEZONE = process.env.TIMEZONE || "America/Los_Angeles";
 const MEETING_DURATION_MINUTES = 30;
 
@@ -57,17 +60,22 @@ export async function getAvailableSlots(): Promise<Record<string, TimeSlot[]>> {
   const endDate = new Date(startOfToday);
   endDate.setDate(endDate.getDate() + DAYS_AHEAD);
 
-  // Get busy times from Google Calendar
+  // Get busy times from all configured calendars
   const busyResponse = await calendar.freebusy.query({
     requestBody: {
       timeMin: startDate.toISOString(),
       timeMax: endDate.toISOString(),
       timeZone: TIMEZONE,
-      items: [{ id: CALENDAR_ID }],
+      items: CALENDAR_IDS.map((id) => ({ id })),
     },
   });
 
-  const busyTimes = busyResponse.data.calendars?.[CALENDAR_ID]?.busy || [];
+  // Aggregate busy times from all calendars
+  const busyTimes: { start?: string | null; end?: string | null }[] = [];
+  for (const calendarId of CALENDAR_IDS) {
+    const calendarBusy = busyResponse.data.calendars?.[calendarId]?.busy || [];
+    busyTimes.push(...calendarBusy);
+  }
 
   // Generate all possible slots and filter out busy ones
   const slotsByDay: Record<string, TimeSlot[]> = {};
@@ -132,24 +140,27 @@ export async function bookSlot(booking: BookingData): Promise<{ success: boolean
   const calendar = getCalendarClient();
 
   try {
-    // Verify the slot is still available
+    // Verify the slot is still available across all calendars
     const busyResponse = await calendar.freebusy.query({
       requestBody: {
         timeMin: booking.slot.start,
         timeMax: booking.slot.end,
         timeZone: TIMEZONE,
-        items: [{ id: CALENDAR_ID }],
+        items: CALENDAR_IDS.map((id) => ({ id })),
       },
     });
 
-    const busyTimes = busyResponse.data.calendars?.[CALENDAR_ID]?.busy || [];
-    if (busyTimes.length > 0) {
-      return { success: false, error: "This time slot is no longer available." };
+    // Check if any calendar has a conflict
+    for (const calendarId of CALENDAR_IDS) {
+      const busyTimes = busyResponse.data.calendars?.[calendarId]?.busy || [];
+      if (busyTimes.length > 0) {
+        return { success: false, error: "This time slot is no longer available." };
+      }
     }
 
     // Create the calendar event
     const event = await calendar.events.insert({
-      calendarId: CALENDAR_ID,
+      calendarId: PRIMARY_CALENDAR_ID,
       requestBody: {
         summary: `Consultation: ${booking.name}${booking.company ? ` (${booking.company})` : ""}`,
         description: `
