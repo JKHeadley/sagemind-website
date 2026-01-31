@@ -111,15 +111,18 @@ export async function getAvailableSlots(): Promise<Record<string, TimeSlot[]>> {
         });
 
         if (!isConflict) {
+          // Format time manually to avoid timezone issues in serverless
+          const hours = slotStart.getHours();
+          const minutes = slotStart.getMinutes();
+          const period = hours >= 12 ? "PM" : "AM";
+          const displayHour = hours % 12 || 12;
+          const displayMinutes = minutes.toString().padStart(2, "0");
+          const display = `${displayHour}:${displayMinutes} ${period}`;
+
           slots.push({
             start: slotStart.toISOString(),
             end: slotEnd.toISOString(),
-            display: slotStart.toLocaleTimeString("en-US", {
-              hour: "numeric",
-              minute: "2-digit",
-              hour12: true,
-              timeZone: TIMEZONE,
-            }),
+            display,
           });
         }
       }
