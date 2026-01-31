@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+:root {
+  /* SageMind Brand Colors - Primary */
+  --dark-navy: #02222e;
+  --white: #ffffff;
+  --bright-cyan: #08f1c7;
+  --teal: #008276;
+  --dark-teal: #014f4f;
+
+  /* SageMind Brand Colors - Extended */
+  --near-black: #020114;
+  --light-mint: #b1ffe7;
+  --dark-cyan: #19707d;
+  --light-blue: #67daf1;
+  --medium-teal: #44b6a2;
+  --navy-blue: #234169;
+
+  /* Theme Variables */
+  --background: var(--near-black);
+  --foreground: var(--white);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Brand Colors */
+  --color-dark-navy: var(--dark-navy);
+  --color-bright-cyan: var(--bright-cyan);
+  --color-teal: var(--teal);
+  --color-dark-teal: var(--dark-teal);
+  --color-near-black: var(--near-black);
+  --color-light-mint: var(--light-mint);
+  --color-dark-cyan: var(--dark-cyan);
+  --color-light-blue: var(--light-blue);
+  --color-medium-teal: var(--medium-teal);
+  --color-navy-blue: var(--navy-blue);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--near-black);
+  color: var(--white);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Animated gradient background */
+.bg-animated-gradient {
+  background: linear-gradient(-45deg, #020114, #02222e, #014f4f, #008276);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Glow effects */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(8, 241, 199, 0.3), 0 0 40px rgba(8, 241, 199, 0.2), 0 0 60px rgba(8, 241, 199, 0.1);
+}
+
+.glow-cyan-intense {
+  box-shadow: 0 0 30px rgba(8, 241, 199, 0.5), 0 0 60px rgba(8, 241, 199, 0.3), 0 0 90px rgba(8, 241, 199, 0.2);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(8, 241, 199, 0.5), 0 0 40px rgba(8, 241, 199, 0.3);
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(2, 34, 46, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(8, 241, 199, 0.1);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(8, 241, 199, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(8, 241, 199, 0.6), 0 0 60px rgba(8, 241, 199, 0.4); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #08f1c7 0%, #67daf1 50%, #b1ffe7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(8, 241, 199, 0.15);
+}
+
+/* Border gradient */
+.border-gradient {
+  position: relative;
+  background: linear-gradient(var(--near-black), var(--near-black)) padding-box,
+              linear-gradient(135deg, #08f1c7, #008276, #014f4f) border-box;
+  border: 2px solid transparent;
+}
+
+/* Animated border */
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(8, 241, 199, 0.3); }
+  50% { border-color: rgba(8, 241, 199, 0.8); }
+}
+
+.animate-border-glow {
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+/* Reveal animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Stagger delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(8, 241, 199, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Grid pattern background */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(rgba(8, 241, 199, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 241, 199, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Radial gradient overlay */
+.radial-gradient-overlay {
+  background: radial-gradient(ellipse at center, rgba(8, 241, 199, 0.1) 0%, transparent 70%);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #08f1c7 0%, #00a896 100%);
+  color: #020114;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(8, 241, 199, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #08f1c7;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  border: 2px solid #08f1c7;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(8, 241, 199, 0.1);
+  box-shadow: 0 0 20px rgba(8, 241, 199, 0.3);
+}
+
+/* Section styles */
+.section-dark {
+  background: linear-gradient(180deg, #020114 0%, #02222e 100%);
+}
+
+.section-darker {
+  background: #020114;
+}
+
+/* Particle dots background */
+.particles-bg {
+  position: relative;
+}
+
+.particles-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle, rgba(8, 241, 199, 0.15) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
