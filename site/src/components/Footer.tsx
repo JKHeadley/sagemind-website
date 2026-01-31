@@ -118,7 +118,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:info@sagemindai.io"
+                  href="mailto:contact@sagemindai.io"
                   className="flex items-center gap-2 hover:text-bright-cyan transition-colors"
                 >
                   <svg className="w-4 h-4 text-bright-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">

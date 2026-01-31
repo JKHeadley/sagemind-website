@@ -251,10 +251,10 @@ export default function ContactPage() {
                       For general inquiries or detailed project discussions.
                     </p>
                     <a
-                      href="mailto:info@sagemindai.io"
+                      href="mailto:contact@sagemindai.io"
                       className="text-bright-cyan font-medium hover:text-light-mint transition-colors"
                     >
-                      info@sagemindai.io
+                      contact@sagemindai.io
                     </a>
                   </div>
                 </div>
