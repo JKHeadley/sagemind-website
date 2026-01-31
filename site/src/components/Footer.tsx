@@ -37,7 +37,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/company/sagemind-ai"
+                href="https://www.linkedin.com/company/sagemindai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg glass flex items-center justify-center text-gray-400 hover:text-bright-cyan hover:border-bright-cyan/30 transition-all"
