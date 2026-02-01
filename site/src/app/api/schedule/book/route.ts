@@ -144,6 +144,12 @@ export async function POST(request: NextRequest) {
         <div class="value">${notes}</div>
       </div>
       ` : ""}
+      ${result.meetLink ? `
+      <div class="field">
+        <div class="label">Meeting Link</div>
+        <div class="value"><a href="${result.meetLink}">${result.meetLink}</a></div>
+      </div>
+      ` : ""}
       <div class="footer">
         This event has been added to your calendar.
       </div>
@@ -185,7 +191,9 @@ export async function POST(request: NextRequest) {
         <strong style="font-size: 18px;">${dateStr}</strong><br>
         <span style="color: #6b7280;">${timeStr} Pacific Time</span>
       </div>
-      <p>We'll reach out to you at <strong>${email}</strong> with meeting details before the call.</p>
+      ${result.meetLink ? `
+      <p><strong>Join the meeting:</strong> <a href="${result.meetLink}" style="color: #0ff4c6;">${result.meetLink}</a></p>
+      ` : `<p>We'll send you the meeting link before the call.</p>`}
       <p>If you need to reschedule or have any questions, please reply to this email or contact us at <a href="mailto:contact@sagemindai.io">contact@sagemindai.io</a>.</p>
       <p>Looking forward to speaking with you!</p>
       <p>Best regards,<br>The Sagemind AI Team</p>

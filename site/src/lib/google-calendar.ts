@@ -213,9 +213,10 @@ export async function bookSlot(booking: BookingData): Promise<{ success: boolean
       }
     }
 
-    // Create the calendar event using local time with timezone
+    // Create the calendar event with Google Meet
     const event = await calendar.events.insert({
       calendarId: PRIMARY_CALENDAR_ID,
+      conferenceDataVersion: 1, // Required for creating Google Meet
       requestBody: {
         summary: `Consultation: ${booking.name}${booking.company ? ` (${booking.company})` : ""}`,
         description: `
@@ -234,6 +235,15 @@ Booked via SageMind AI website
           dateTime: booking.slot.end,
           timeZone: TIMEZONE,
         },
+        // Add Google Meet video conferencing
+        conferenceData: {
+          createRequest: {
+            requestId: `sagemind-${Date.now()}`,
+            conferenceSolutionKey: {
+              type: "hangoutsMeet",
+            },
+          },
+        },
         // Note: Service accounts can't add attendees without Domain-Wide Delegation
         // The confirmation email serves as the notification to the customer
         reminders: {
@@ -244,10 +254,17 @@ Booked via SageMind AI website
           ],
         },
       },
-      // sendUpdates not needed without attendees
     });
 
-    return { success: true, eventId: event.data.id || undefined };
+    const meetLink = event.data.conferenceData?.entryPoints?.find(
+      (ep) => ep.entryPointType === "video"
+    )?.uri;
+
+    return {
+      success: true,
+      eventId: event.data.id || undefined,
+      meetLink: meetLink || undefined,
+    };
   } catch (error: unknown) {
     const err = error as { code?: number; message?: string; errors?: Array<{ message: string }> };
     console.error("Error booking slot:", JSON.stringify({
