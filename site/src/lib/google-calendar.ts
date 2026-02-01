@@ -36,8 +36,6 @@ export interface TimeSlot {
   start: string; // ISO string in UTC
   end: string; // ISO string in UTC
   display: string; // Human-readable (PST)
-  localStart: string; // Local time string for Google Calendar (no Z suffix)
-  localEnd: string; // Local time string for Google Calendar (no Z suffix)
 }
 
 export interface BookingData {
@@ -92,14 +90,6 @@ function createPacificDate(baseDate: Date, hour: number, minute: number): Date {
   const utcHour = hour - offset; // Convert PST/PDT hour to UTC
 
   return new Date(Date.UTC(year, month, day, utcHour, minute, 0, 0));
-}
-
-/**
- * Format a date as local time string (without Z suffix) for Google Calendar
- */
-function formatLocalDateTime(date: Date, offsetHours: number): string {
-  const localDate = new Date(date.getTime() + offsetHours * 60 * 60 * 1000);
-  return localDate.toISOString().replace("Z", "");
 }
 
 /**
@@ -185,8 +175,6 @@ export async function getAvailableSlots(): Promise<Record<string, TimeSlot[]>> {
             start: slotStart.toISOString(),
             end: slotEnd.toISOString(),
             display,
-            localStart: formatLocalDateTime(slotStart, -offset),
-            localEnd: formatLocalDateTime(slotEnd, -offset),
           });
         }
       }
@@ -239,11 +227,11 @@ ${booking.notes ? `Notes: ${booking.notes}` : ""}
 Booked via SageMind AI website
         `.trim(),
         start: {
-          dateTime: booking.slot.localStart || booking.slot.start,
+          dateTime: booking.slot.start,
           timeZone: TIMEZONE,
         },
         end: {
-          dateTime: booking.slot.localEnd || booking.slot.end,
+          dateTime: booking.slot.end,
           timeZone: TIMEZONE,
         },
         // Note: Service accounts can't add attendees without Domain-Wide Delegation
