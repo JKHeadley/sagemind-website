@@ -182,7 +182,8 @@ Booked via SageMind AI website
           dateTime: booking.slot.end,
           timeZone: TIMEZONE,
         },
-        attendees: [{ email: booking.email }],
+        // Note: Service accounts can't add attendees without Domain-Wide Delegation
+        // The confirmation email serves as the notification to the customer
         reminders: {
           useDefault: false,
           overrides: [
@@ -191,7 +192,7 @@ Booked via SageMind AI website
           ],
         },
       },
-      sendUpdates: "all", // Send invite to attendee
+      // sendUpdates not needed without attendees
     });
 
     return { success: true, eventId: event.data.id || undefined };
