@@ -191,7 +191,7 @@ export async function getAvailableSlots(): Promise<Record<string, TimeSlot[]>> {
 /**
  * Book a time slot by creating a calendar event
  */
-export async function bookSlot(booking: BookingData): Promise<{ success: boolean; eventId?: string; error?: string }> {
+export async function bookSlot(booking: BookingData): Promise<{ success: boolean; eventId?: string; meetLink?: string; error?: string }> {
   const calendar = getCalendarClient();
 
   try {
