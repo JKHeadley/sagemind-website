@@ -195,8 +195,14 @@ Booked via SageMind AI website
     });
 
     return { success: true, eventId: event.data.id || undefined };
-  } catch (error) {
-    console.error("Error booking slot:", error);
+  } catch (error: unknown) {
+    const err = error as { code?: number; message?: string; errors?: Array<{ message: string }> };
+    console.error("Error booking slot:", JSON.stringify({
+      code: err.code,
+      message: err.message,
+      errors: err.errors,
+      calendarId: PRIMARY_CALENDAR_ID,
+    }));
     return { success: false, error: "Failed to create booking. Please try again." };
   }
 }
