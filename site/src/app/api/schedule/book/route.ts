@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 
 // Rate limiting
 const rateLimit = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_MAX = 20;
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
 
 function isRateLimited(ip: string): boolean {
