@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send confirmation email to the business
+    // Send confirmation emails
     if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -84,21 +84,15 @@ export async function POST(request: NextRequest) {
         },
       });
 
+      // Use the display time from the slot (already formatted in Pacific)
+      const timeStr = slot.display || "Scheduled time";
+      // Parse the date from slot.start for the date portion
       const meetingDate = new Date(slot.start);
-      const dateStr = meetingDate.toLocaleDateString("en-US", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        timeZone: process.env.TIMEZONE || "America/Los_Angeles",
-      });
-      const timeStr = meetingDate.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-        timeZone: process.env.TIMEZONE || "America/Los_Angeles",
-      });
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const dateStr = `${days[meetingDate.getUTCDay()]}, ${months[meetingDate.getUTCMonth()]} ${meetingDate.getUTCDate()}, ${meetingDate.getUTCFullYear()}`;
 
+      // Email to business owner
       await transporter.sendMail({
         from: process.env.GMAIL_USER,
         to: process.env.CONTACT_EMAIL || process.env.GMAIL_USER,
@@ -151,7 +145,52 @@ export async function POST(request: NextRequest) {
       </div>
       ` : ""}
       <div class="footer">
-        The calendar invite has been sent to both parties automatically.
+        This event has been added to your calendar.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+        `.trim(),
+      });
+
+      // Confirmation email to customer
+      await transporter.sendMail({
+        from: process.env.GMAIL_USER,
+        to: email,
+        subject: `Your Consultation with Sagemind AI - ${dateStr}`,
+        html: `
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #0ff4c6 0%, #00d4aa 100%); color: #0a0a0f; padding: 20px; border-radius: 8px 8px 0 0; }
+    .content { background: #f9fafb; padding: 24px; border-radius: 0 0 8px 8px; }
+    .highlight { background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #0ff4c6; margin: 16px 0; }
+    .footer { margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0; font-size: 20px;">Consultation Confirmed!</h1>
+      <p style="margin: 8px 0 0 0; opacity: 0.9;">Thank you for scheduling a call with us</p>
+    </div>
+    <div class="content">
+      <p>Hi ${name},</p>
+      <p>Your consultation has been confirmed for:</p>
+      <div class="highlight">
+        <strong style="font-size: 18px;">${dateStr}</strong><br>
+        <span style="color: #6b7280;">${timeStr} Pacific Time</span>
+      </div>
+      <p>We'll reach out to you at <strong>${email}</strong> with meeting details before the call.</p>
+      <p>If you need to reschedule or have any questions, please reply to this email or contact us at <a href="mailto:contact@sagemindai.io">contact@sagemindai.io</a>.</p>
+      <p>Looking forward to speaking with you!</p>
+      <p>Best regards,<br>The Sagemind AI Team</p>
+      <div class="footer">
+        Sagemind AI | <a href="https://sagemindai.io">sagemindai.io</a>
       </div>
     </div>
   </div>

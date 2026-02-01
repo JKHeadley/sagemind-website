@@ -20,7 +20,7 @@ const CALENDAR_IDS = process.env.GOOGLE_CALENDAR_IDS
 const TIMEZONE = process.env.TIMEZONE || "America/Los_Angeles";
 const MEETING_DURATION_MINUTES = 30;
 
-// Business hours (Pacific Time)
+// Business hours (in TIMEZONE above)
 const BUSINESS_HOURS = {
   start: 9, // 9 AM
   end: 17, // 5 PM
@@ -29,10 +29,15 @@ const BUSINESS_HOURS = {
 // Days to look ahead for availability
 const DAYS_AHEAD = 14;
 
+// PST/PDT offset from UTC (hours) - simplified, doesn't handle DST transitions perfectly
+const PST_OFFSET = -8;
+
 export interface TimeSlot {
-  start: string; // ISO string
-  end: string; // ISO string
-  display: string; // Human-readable
+  start: string; // ISO string in UTC
+  end: string; // ISO string in UTC
+  display: string; // Human-readable (PST)
+  localStart: string; // Local time string for Google Calendar (no Z suffix)
+  localEnd: string; // Local time string for Google Calendar (no Z suffix)
 }
 
 export interface BookingData {
@@ -44,27 +49,85 @@ export interface BookingData {
 }
 
 /**
+ * Convert a date to PST/PDT timezone offset
+ * Returns the offset in hours (negative for west of UTC)
+ */
+function getPSTOffset(date: Date): number {
+  // Simple DST check for US Pacific Time
+  // DST starts second Sunday of March, ends first Sunday of November
+  const year = date.getUTCFullYear();
+  const month = date.getUTCMonth();
+  const day = date.getUTCDate();
+
+  // March - check if after second Sunday
+  if (month === 2) {
+    const firstDay = new Date(Date.UTC(year, 2, 1)).getUTCDay();
+    const secondSunday = firstDay === 0 ? 8 : 15 - firstDay;
+    if (day >= secondSunday) return -7; // PDT
+  }
+  // November - check if before first Sunday
+  else if (month === 10) {
+    const firstDay = new Date(Date.UTC(year, 10, 1)).getUTCDay();
+    const firstSunday = firstDay === 0 ? 1 : 8 - firstDay;
+    if (day < firstSunday) return -7; // PDT
+  }
+  // April through October = PDT
+  else if (month > 2 && month < 10) {
+    return -7; // PDT
+  }
+
+  return -8; // PST
+}
+
+/**
+ * Create a date in Pacific time for a specific hour/minute
+ */
+function createPacificDate(baseDate: Date, hour: number, minute: number): Date {
+  const year = baseDate.getUTCFullYear();
+  const month = baseDate.getUTCMonth();
+  const day = baseDate.getUTCDate();
+
+  // Create date at the specified local time, then adjust to UTC
+  const offset = getPSTOffset(baseDate);
+  const utcHour = hour - offset; // Convert PST/PDT hour to UTC
+
+  return new Date(Date.UTC(year, month, day, utcHour, minute, 0, 0));
+}
+
+/**
+ * Format a date as local time string (without Z suffix) for Google Calendar
+ */
+function formatLocalDateTime(date: Date, offsetHours: number): string {
+  const localDate = new Date(date.getTime() + offsetHours * 60 * 60 * 1000);
+  return localDate.toISOString().replace("Z", "");
+}
+
+/**
  * Get available time slots for the next N days
  */
 export async function getAvailableSlots(): Promise<Record<string, TimeSlot[]>> {
   const calendar = getCalendarClient();
 
   const now = new Date();
-  const startOfToday = new Date(now);
-  startOfToday.setHours(0, 0, 0, 0);
 
-  // Start from tomorrow to give buffer
-  const startDate = new Date(startOfToday);
-  startDate.setDate(startDate.getDate() + 1);
+  // Start from tomorrow (in Pacific time)
+  const tomorrowUTC = new Date(Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate() + 1
+  ));
 
-  const endDate = new Date(startOfToday);
-  endDate.setDate(endDate.getDate() + DAYS_AHEAD);
+  const endDateUTC = new Date(Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate() + DAYS_AHEAD
+  ));
 
   // Get busy times from all configured calendars
   const busyResponse = await calendar.freebusy.query({
     requestBody: {
-      timeMin: startDate.toISOString(),
-      timeMax: endDate.toISOString(),
+      timeMin: tomorrowUTC.toISOString(),
+      timeMax: endDateUTC.toISOString(),
       timeZone: TIMEZONE,
       items: CALENDAR_IDS.map((id) => ({ id })),
     },
@@ -81,24 +144,25 @@ export async function getAvailableSlots(): Promise<Record<string, TimeSlot[]>> {
   const slotsByDay: Record<string, TimeSlot[]> = {};
 
   for (let d = 0; d < DAYS_AHEAD; d++) {
-    const date = new Date(startDate);
-    date.setDate(startDate.getDate() + d);
+    const dayDate = new Date(Date.UTC(
+      tomorrowUTC.getUTCFullYear(),
+      tomorrowUTC.getUTCMonth(),
+      tomorrowUTC.getUTCDate() + d
+    ));
 
-    // Skip weekends
-    const dayOfWeek = date.getDay();
-    if (dayOfWeek === 0 || dayOfWeek === 6) continue;
+    // Skip weekends (check in Pacific time)
+    const offset = getPSTOffset(dayDate);
+    const pacificDay = new Date(dayDate.getTime() + offset * 60 * 60 * 1000).getUTCDay();
+    if (pacificDay === 0 || pacificDay === 6) continue;
 
-    const dateKey = date.toISOString().split("T")[0];
+    const dateKey = dayDate.toISOString().split("T")[0];
     const slots: TimeSlot[] = [];
 
-    // Generate slots for business hours
+    // Generate slots for business hours (in Pacific time)
     for (let hour = BUSINESS_HOURS.start; hour < BUSINESS_HOURS.end; hour++) {
       for (let minute = 0; minute < 60; minute += MEETING_DURATION_MINUTES) {
-        const slotStart = new Date(date);
-        slotStart.setHours(hour, minute, 0, 0);
-
-        const slotEnd = new Date(slotStart);
-        slotEnd.setMinutes(slotEnd.getMinutes() + MEETING_DURATION_MINUTES);
+        const slotStart = createPacificDate(dayDate, hour, minute);
+        const slotEnd = new Date(slotStart.getTime() + MEETING_DURATION_MINUTES * 60 * 1000);
 
         // Skip if slot is in the past
         if (slotStart <= now) continue;
@@ -111,18 +175,18 @@ export async function getAvailableSlots(): Promise<Record<string, TimeSlot[]>> {
         });
 
         if (!isConflict) {
-          // Format time manually to avoid timezone issues in serverless
-          const hours = slotStart.getHours();
-          const minutes = slotStart.getMinutes();
-          const period = hours >= 12 ? "PM" : "AM";
-          const displayHour = hours % 12 || 12;
-          const displayMinutes = minutes.toString().padStart(2, "0");
+          // Format display time in Pacific
+          const period = hour >= 12 ? "PM" : "AM";
+          const displayHour = hour % 12 || 12;
+          const displayMinutes = minute.toString().padStart(2, "0");
           const display = `${displayHour}:${displayMinutes} ${period}`;
 
           slots.push({
             start: slotStart.toISOString(),
             end: slotEnd.toISOString(),
             display,
+            localStart: formatLocalDateTime(slotStart, -offset),
+            localEnd: formatLocalDateTime(slotEnd, -offset),
           });
         }
       }
@@ -161,7 +225,7 @@ export async function bookSlot(booking: BookingData): Promise<{ success: boolean
       }
     }
 
-    // Create the calendar event
+    // Create the calendar event using local time with timezone
     const event = await calendar.events.insert({
       calendarId: PRIMARY_CALENDAR_ID,
       requestBody: {
@@ -175,11 +239,11 @@ ${booking.notes ? `Notes: ${booking.notes}` : ""}
 Booked via SageMind AI website
         `.trim(),
         start: {
-          dateTime: booking.slot.start,
+          dateTime: booking.slot.localStart || booking.slot.start,
           timeZone: TIMEZONE,
         },
         end: {
-          dateTime: booking.slot.end,
+          dateTime: booking.slot.localEnd || booking.slot.end,
           timeZone: TIMEZONE,
         },
         // Note: Service accounts can't add attendees without Domain-Wide Delegation
