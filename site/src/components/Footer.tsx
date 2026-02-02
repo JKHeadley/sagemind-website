@@ -21,7 +21,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Custom websites, Google Workspace solutions, and bespoke AI applications.
+              Custom websites, Google Workspace solutions, and tailored AI applications.
               We craft tailored solutions that fit your unique business needs.
             </p>
             <div className="flex gap-4">

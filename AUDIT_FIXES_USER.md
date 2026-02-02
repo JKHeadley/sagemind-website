@@ -6,14 +6,9 @@ These issues require decisions, external services, or content that only you can 
 
 ## High Priority
 
-- [ ] **Stats section needs real metrics or removal**
+- [x] **Stats section needs real metrics or removal**
   - File: `site/src/app/page.tsx:5-10`
-  - Current stats ("Fast", "Bespoke", "100% Custom Built") aren't real numbers
-  - **Options:**
-    - [ ] Provide real metrics (e.g., "50+ Projects", "20+ Clients", etc.)
-    - [ ] Remove the stats section entirely
-    - [ ] Keep as-is (not recommended)
-  - **Action needed:** Provide actual numbers or decide to remove
+  - **Completed:** Updated to real metrics (18+ Years Experience, 10+ Projects Delivered, 5+ Happy Clients, 100% Custom Built)
 
 - [ ] **Only one featured project (Bot-Me.ai)**
   - File: `site/src/app/page.tsx:166-237`
@@ -25,11 +20,9 @@ These issues require decisions, external services, or content that only you can 
 
 ## Medium Priority
 
-- [ ] **Verify LinkedIn company page exists**
-  - URL: `linkedin.com/company/sagemind-ai`
-  - **Action needed:**
-    - [ ] Verify page exists and has content
-    - [ ] If not, create it OR provide alternative (Justin's personal LinkedIn?)
+- [x] **Verify LinkedIn company page exists**
+  - **Completed:** Verified correct URL is `linkedin.com/company/sagemindai` (no hyphen)
+  - Website already uses the correct URL in Footer and Contact page
 
 - [ ] **No testimonials or client logos**
   - **Options:**
@@ -48,8 +41,9 @@ These issues require decisions, external services, or content that only you can 
 
 ## Low Priority
 
-- [ ] **Consider adding FAQ section**
-  - **Action needed:** Provide 5-8 common questions and answers if desired
+- [x] **Consider adding FAQ section**
+  - **Completed:** Created `/faq` page with 16 questions across 6 categories (Pricing, Timeline, Process, AI & Technical, Client Requirements, Revisions)
+  - Added FAQ link to navigation
 
 ---
 

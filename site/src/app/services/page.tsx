@@ -38,7 +38,7 @@ export default function ServicesPage() {
               Our Services
             </div>
             <h1 className="text-5xl lg:text-6xl font-bold mb-8">
-              <span className="text-white">Bespoke Solutions, </span>
+              <span className="text-white">Tailored Solutions, </span>
               <span className="gradient-text">Built for You</span>
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed">
@@ -183,7 +183,7 @@ export default function ServicesPage() {
                 </div>
 
                 <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                  Bespoke AI-driven software and data solutions that transform your unique challenges
+                  Custom AI-driven software and data solutions that transform your unique challenges
                   into tailored applications. We integrate AI to unlock your business potential and
                   create competitive advantages.
                 </p>

@@ -16,15 +16,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SageMind AI | Custom Solutions, Built for You",
-  description: "Custom websites, Google Workspace solutions, and bespoke AI applications. We craft tailored solutions that fit your unique business needs. Fast delivery, 100% custom.",
-  keywords: ["custom websites", "Google Workspace solutions", "AI applications", "bespoke software", "small business websites", "data solutions", "Bay Area"],
+  description: "Custom websites, Google Workspace solutions, and custom AI applications. We craft tailored solutions that fit your unique business needs. Fast delivery, 100% custom.",
+  keywords: ["custom websites", "Google Workspace solutions", "AI applications", "custom software", "small business websites", "data solutions", "Bay Area"],
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-icon.png",
   },
   openGraph: {
     title: "SageMind AI | Custom Solutions, Built for You",
-    description: "Custom websites, Google Workspace solutions, and bespoke AI applications. We craft tailored solutions that fit your unique business needs.",
+    description: "Custom websites, Google Workspace solutions, and custom AI applications. We craft tailored solutions that fit your unique business needs.",
     url: "https://sagemindai.io",
     siteName: "SageMind AI",
     locale: "en_US",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "SageMind AI | Custom Solutions, Built for You",
-    description: "Custom websites, Google Workspace solutions, and bespoke AI applications. We craft tailored solutions that fit your unique business needs.",
+    description: "Custom websites, Google Workspace solutions, and custom AI applications. We craft tailored solutions that fit your unique business needs.",
   },
 };
 

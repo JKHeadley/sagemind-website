@@ -42,7 +42,7 @@ const credentials = [
 
 const values = [
   {
-    title: "Truly Bespoke",
+    title: "Fully Custom",
     description: "Every solution is custom-built for your specific needs. No templates, no one-size-fits-all.",
     icon: (
       <svg className="w-7 h-7 text-bright-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,7 +170,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">AI & Data Solutions</h3>
               <p className="text-gray-400 mb-6">
-                Bespoke AI-driven software and data applications that turn your unique
+                Custom AI-driven software and data applications that turn your unique
                 challenges into tailored solutions.
               </p>
               <Link href="/services#ai-solutions" className="text-bright-cyan font-medium hover:text-light-mint transition-colors inline-flex items-center gap-2">
@@ -207,7 +207,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white">Justin Headley</h3>
-                    <p className="text-bright-cyan font-medium">Founder & Principal</p>
+                    <p className="text-bright-cyan font-medium">Founder & CEO</p>
                   </div>
                 </div>
 
@@ -302,7 +302,7 @@ export default function AboutPage() {
           <div className="glass rounded-3xl p-10 lg:p-14 border border-bright-cyan/20 text-center">
             <div className="text-6xl text-bright-cyan/30 mb-6">&ldquo;</div>
             <blockquote className="text-2xl lg:text-3xl text-white font-medium leading-relaxed mb-8">
-              The best solutions aren&apos;t built from templates—they&apos;re built from
+              The best solutions aren&apos;t built from templates. They&apos;re built from
               conversations. Understanding your unique challenges is where great software begins.
             </blockquote>
             <div className="flex items-center justify-center gap-4">

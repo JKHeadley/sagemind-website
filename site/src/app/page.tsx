@@ -5,8 +5,8 @@ import ProcessAnimation from "@/components/ProcessAnimation";
 const stats = [
   { value: "18+", label: "Years Building" },
   { value: "Fast", label: "Turnaround" },
+  { value: "Direct", label: "Communication" },
   { value: "100%", label: "Custom Built" },
-  { value: "Bespoke", label: "Solutions" },
 ];
 
 export default function Home() {
@@ -27,7 +27,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
               <div className="inline-block px-4 py-2 rounded-full glass border border-bright-cyan/30 text-bright-cyan text-sm font-medium mb-8">
-                Bespoke Solutions, Built Fast
+                Custom Solutions, Built Fast
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
                 <span className="text-white">Your Vision,</span>
@@ -139,7 +139,7 @@ export default function Home() {
                 AI & Data Solutions
               </h3>
               <p className="text-gray-400 text-lg mb-6 leading-relaxed">
-                Bespoke AI-driven software and data applications built for your unique challenges.
+                Tailored AI-driven software and data applications built for your unique challenges.
                 We turn your specific needs into tailored solutions that unlock your business potential.
               </p>
               <ul className="space-y-3 mb-8">
@@ -194,7 +194,7 @@ export default function Home() {
                   AI Assistants for YouTube Influencers
                 </p>
                 <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                  A bespoke AI platform built for content creators. Intelligent assistants that understand their brand,
+                  A custom AI platform built for content creators. Intelligent assistants that understand their brand,
                   engage with their audience, and help scale their influence while maintaining their unique voice.
                 </p>
                 <div className="flex flex-wrap gap-3 mb-8">
@@ -252,7 +252,7 @@ export default function Home() {
               <div className="space-y-8">
                 {[
                   {
-                    title: "Truly Bespoke",
+                    title: "Fully Custom",
                     description: "No templates, no cookie-cutter solutions. Every project is crafted specifically for your unique needs and goals.",
                   },
                   {
