@@ -1,11 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 
-const steps = [
-  { label: "Your Data", icon: "📊" },
-  { label: "AI Processing", icon: "🧠" },
-  { label: "Real Results", icon: "🚀" },
+interface Step {
+  label: string;
+  icon: ReactNode;
+}
+
+const steps: Step[] = [
+  {
+    label: "Your Data",
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+      </svg>
+    ),
+  },
+  {
+    label: "AI Processing",
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <circle cx="12" cy="9" r="2" strokeWidth={1.5} />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 7V5m0 8v-2m-2-2H8m8 0h-2m-3.5-1.5L9 6m6 6l-1.5-1.5m-3 0L9 12m6-6l-1.5 1.5" />
+      </svg>
+    ),
+  },
+  {
+    label: "Real Results",
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    ),
+  },
 ];
 
 export default function ProcessAnimation() {
@@ -82,7 +110,7 @@ export default function ProcessAnimation() {
                       : "opacity-0 scale-75"
                   }`}
                 >
-                  <div className="text-5xl mb-3">{step.icon}</div>
+                  <div className="text-bright-cyan mb-3">{step.icon}</div>
                   <div className="text-white font-semibold text-lg">{step.label}</div>
                 </div>
               ))}
@@ -115,13 +143,23 @@ export default function ProcessAnimation() {
               }`}
             >
               <div
-                className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl transition-all duration-300 ${
+                className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
                   activeStep === index
-                    ? "bg-gradient-to-br from-bright-cyan to-teal glow-cyan"
-                    : "bg-white/10"
+                    ? "bg-gradient-to-br from-bright-cyan to-teal glow-cyan text-near-black"
+                    : "bg-white/10 text-gray-400"
                 }`}
               >
-                {step.icon}
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {index === 0 && (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                  )}
+                  {index === 1 && (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  )}
+                  {index === 2 && (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  )}
+                </svg>
               </div>
               <span className="text-xs text-gray-400 mt-2 whitespace-nowrap">{step.label}</span>
             </div>

@@ -1,12 +1,17 @@
 import { google } from "googleapis";
 
-// Initialize Google Calendar API with service account
+// Initialize Google Calendar API with service account and domain-wide delegation
 function getCalendarClient() {
   const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY || "{}");
 
+  // Use domain-wide delegation to impersonate the calendar owner
+  // This allows the service account to add attendees to events
   const auth = new google.auth.GoogleAuth({
     credentials,
     scopes: ["https://www.googleapis.com/auth/calendar"],
+    clientOptions: {
+      subject: process.env.GOOGLE_CALENDAR_ID || "primary", // Impersonate the calendar owner
+    },
   });
 
   return google.calendar({ version: "v3", auth });
@@ -217,6 +222,7 @@ export async function bookSlot(booking: BookingData): Promise<{ success: boolean
     const event = await calendar.events.insert({
       calendarId: PRIMARY_CALENDAR_ID,
       conferenceDataVersion: 1, // Required for creating Google Meet
+      sendUpdates: "all", // Send calendar invites to attendees
       requestBody: {
         summary: `Consultation: ${booking.name}${booking.company ? ` (${booking.company})` : ""}`,
         description: `
@@ -244,8 +250,11 @@ Booked via SageMind AI website
             },
           },
         },
-        // Note: Service accounts can't add attendees without Domain-Wide Delegation
-        // The confirmation email serves as the notification to the customer
+        // Add the customer as an attendee (requires Domain-Wide Delegation)
+        attendees: [
+          { email: booking.email, displayName: booking.name },
+        ],
+        // Send email notifications to attendees
         reminders: {
           useDefault: false,
           overrides: [
