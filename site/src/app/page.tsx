@@ -163,19 +163,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Project - Bot-Me.ai */}
+      {/* Our Edge */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 particles-bg opacity-50" />
+        <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-bright-cyan/5 rounded-full blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-2 rounded-full glass border border-bright-cyan/30 text-bright-cyan text-sm font-medium mb-6">
-              Featured Project
+              Our Edge
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-white">See What We </span>
-              <span className="gradient-text">Build</span>
+              <span className="text-white">Always </span>
+              <span className="gradient-text">Evolving</span>
             </h2>
+            <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+              AI moves fast. We move with it. Every tool, framework, and strategy we use is current — because your solution deserves the best available today, not what worked last year.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Cutting-Edge AI Tools */}
+            <div className="glass rounded-3xl p-8 border border-white/5 hover:border-bright-cyan/30 transition-all card-hover group">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-bright-cyan to-teal flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-7 h-7 text-near-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-bright-cyan transition-colors">
+                Cutting-Edge AI Tools
+              </h3>
+              <p className="text-gray-400 leading-relaxed">
+                We build with the latest AI development tools and frameworks — from advanced language models to modern agent architectures. Your project benefits from what&apos;s possible right now, not what was standard a year ago.
+              </p>
+            </div>
+
+            {/* Continuous Learning */}
+            <div className="glass rounded-3xl p-8 border border-white/5 hover:border-bright-cyan/30 transition-all card-hover group">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-bright-cyan to-teal flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-7 h-7 text-near-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-bright-cyan transition-colors">
+                Continuous Learning
+              </h3>
+              <p className="text-gray-400 leading-relaxed">
+                AI research moves at breakneck speed. We invest time every week studying new approaches, testing emerging strategies, and evaluating what actually works — so we can bring proven innovations to your project.
+              </p>
+            </div>
+
+            {/* Future-Ready Architecture */}
+            <div className="glass rounded-3xl p-8 border border-white/5 hover:border-bright-cyan/30 transition-all card-hover group">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-bright-cyan to-teal flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-7 h-7 text-near-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-bright-cyan transition-colors">
+                Future-Ready Architecture
+              </h3>
+              <p className="text-gray-400 leading-relaxed">
+                We design solutions that grow with the technology. Modular architectures, clean integrations, and forward-compatible patterns mean your investment stays relevant as AI capabilities expand.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* From Our Lab - Bot-Me.ai */}
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-near-black via-dark-navy/30 to-near-black" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 rounded-full glass border border-bright-cyan/30 text-bright-cyan text-sm font-medium mb-6">
+              From Our Lab
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <span className="text-white">Built </span>
+              <span className="gradient-text">In-House</span>
+            </h2>
+            <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+              We don&apos;t just build for clients — we build for ourselves, too. Bot-Me.ai is a SageMind product, developed in-house to push the boundaries of what AI can do.
+            </p>
           </div>
 
           <div className="glass rounded-3xl p-8 lg:p-12 border-gradient card-hover">
@@ -191,11 +262,10 @@ export default function Home() {
                   <h3 className="text-3xl font-bold text-white">Bot-Me.ai</h3>
                 </div>
                 <p className="text-2xl text-bright-cyan font-medium mb-4">
-                  AI Assistants for YouTube Influencers
+                  AI Assistants for YouTube Creators
                 </p>
                 <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                  A custom AI platform built for content creators. Intelligent assistants that understand their brand,
-                  engage with their audience, and help scale their influence while maintaining their unique voice.
+                  A full AI platform we designed, built, and shipped. Bot-Me.ai creates intelligent assistants for YouTube creators — handling brand voice, audience engagement, and content at scale. It&apos;s proof we don&apos;t just talk about AI. We ship it.
                 </p>
                 <div className="flex flex-wrap gap-3 mb-8">
                   {["AI Agents", "YouTube API", "NLP", "Brand Voice AI"].map((tag) => (
@@ -208,9 +278,9 @@ export default function Home() {
                   href="https://www.bot-me.ai/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary inline-flex items-center gap-2"
+                  className="btn-secondary inline-flex items-center gap-2"
                 >
-                  Visit Bot-Me.ai
+                  See It in Action
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
@@ -218,16 +288,24 @@ export default function Home() {
               </div>
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-bright-cyan/20 to-teal/20 rounded-2xl blur-2xl" />
-                <div className="relative bg-gradient-to-br from-dark-navy to-near-black rounded-2xl p-8 border border-bright-cyan/20">
-                  <div className="aspect-video bg-near-black rounded-xl flex items-center justify-center border border-white/5">
-                    <div className="text-center">
-                      <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-bright-cyan to-teal flex items-center justify-center animate-pulse-glow">
-                        <svg className="w-10 h-10 text-near-black" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                        </svg>
-                      </div>
-                      <p className="text-gray-500 text-sm">Custom AI Platform</p>
-                    </div>
+                <div className="relative space-y-4">
+                  <div className="rounded-2xl overflow-hidden border border-bright-cyan/20 shadow-lg shadow-bright-cyan/5">
+                    <Image
+                      src="/botme-hero.png"
+                      alt="Bot-Me.ai platform — Transform Your Video Library Into An Interactive AI"
+                      width={1135}
+                      height={674}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  <div className="rounded-2xl overflow-hidden border border-bright-cyan/20 shadow-lg shadow-bright-cyan/5">
+                    <Image
+                      src="/botme-bots.png"
+                      alt="Bot-Me.ai marketplace — Live AI assistants for YouTube creators"
+                      width={1421}
+                      height={901}
+                      className="w-full h-auto"
+                    />
                   </div>
                 </div>
               </div>

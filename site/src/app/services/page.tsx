@@ -308,6 +308,111 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Pricing & Engagement */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-near-black via-dark-navy/30 to-near-black" />
+        <div className="absolute left-1/4 top-0 w-[600px] h-[400px] bg-bright-cyan/5 rounded-full blur-3xl" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 rounded-full glass border border-bright-cyan/30 text-bright-cyan text-sm font-medium mb-6">
+              Transparent Pricing
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <span className="text-white">How We </span>
+              <span className="gradient-text">Charge</span>
+            </h2>
+            <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+              Clear pricing, no surprises. We scope every project individually and give you a fixed quote before any work begins.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            {/* Small Business Pricing */}
+            <div className="glass rounded-3xl p-8 lg:p-10 border border-white/5 hover:border-bright-cyan/30 transition-all card-hover">
+              <div className="text-bright-cyan text-sm font-medium mb-2">Small Business Solutions</div>
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="text-4xl font-bold text-white">$2,500</span>
+                <span className="text-gray-400 text-lg">starting</span>
+              </div>
+              <p className="text-gray-400 mb-6 leading-relaxed">
+                Custom websites and Google Workspace setups. Price varies with scope — a clean business site lands near the starting range, while sites with advanced integrations or e-commerce go higher.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {["Fixed-price quote upfront", "Milestone-based payments", "No hidden fees or hourly surprises", "Includes deployment and handoff"].map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-gray-300">
+                    <svg className="w-5 h-5 text-bright-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/contact" className="btn-secondary inline-flex items-center gap-2 text-sm">
+                Get a Quote
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* AI & Data Pricing */}
+            <div className="glass rounded-3xl p-8 lg:p-10 border border-white/5 hover:border-bright-cyan/30 transition-all card-hover">
+              <div className="text-bright-cyan text-sm font-medium mb-2">AI & Data Solutions</div>
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="text-4xl font-bold text-white">Custom</span>
+                <span className="text-gray-400 text-lg">scoped per project</span>
+              </div>
+              <p className="text-gray-400 mb-6 leading-relaxed">
+                Every AI project is different — a focused automation tool is a very different scope than a full platform. We start with a free discovery call, then deliver a detailed proposal with clear pricing.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {["Free discovery call to scope your needs", "Detailed proposal before any commitment", "Fixed-price or retainer options", "Transparent milestone tracking"].map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-gray-300">
+                    <svg className="w-5 h-5 text-bright-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/schedule" className="btn-primary inline-flex items-center gap-2 text-sm">
+                Book a Discovery Call
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Engagement Models */}
+          <div className="glass rounded-3xl p-8 lg:p-10 border border-white/5">
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">Engagement Models</h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Fixed Project",
+                  description: "Clear scope, fixed price, defined deliverables. Best for projects with well-defined goals. Most clients start here.",
+                },
+                {
+                  title: "Hourly Consulting",
+                  description: "Flexible hours for advisory work, code reviews, or ongoing development. Best for evolving needs or technical guidance.",
+                },
+                {
+                  title: "Monthly Retainer",
+                  description: "Dedicated hours each month for continuous support, updates, and new features. Best for long-term partnerships.",
+                },
+              ].map((model) => (
+                <div key={model.title} className="text-center">
+                  <h4 className="text-lg font-bold text-white mb-2">{model.title}</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">{model.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* What Sets Us Apart */}
       <section className="py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

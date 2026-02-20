@@ -10,12 +10,22 @@ const faqs = [
       {
         question: "How much does a custom website cost?",
         answer:
-          "Every project is unique, so we provide custom quotes based on your specific needs. We'll discuss your goals and requirements, then give you a clear, transparent proposal with no hidden fees.",
+          "Small business websites typically start around $2,500 for a polished, custom-built site. More complex sites with advanced features, integrations, or e-commerce can range higher. We scope every project individually and give you a clear, fixed quote upfront — no surprises.",
+      },
+      {
+        question: "How much do AI and custom software projects cost?",
+        answer:
+          "AI and data projects vary widely based on scope — from focused automation tools to full platforms. Because every project is different, we start with a free discovery call to understand your needs, then provide a detailed proposal with transparent pricing. No commitment until you're comfortable with the scope and cost.",
+      },
+      {
+        question: "How do you structure engagements?",
+        answer:
+          "We offer three engagement models depending on what fits your project: fixed-price projects with a clear scope and deliverable, hourly consulting for advisory or ongoing development work, and monthly retainers for teams that need continuous support. Most clients start with a fixed-price project.",
       },
       {
         question: "Do you offer payment plans?",
         answer:
-          "Yes, we can work out payment structures that fit your budget. We're flexible and want to make it easy for you to get started.",
+          "Yes. For larger projects, we typically split payments across milestones — a portion upfront, progress payments at key deliverables, and the balance at launch. We're flexible and happy to find a structure that works for your budget.",
       },
     ],
   },

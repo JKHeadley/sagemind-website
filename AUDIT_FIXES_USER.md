@@ -10,13 +10,9 @@ These issues require decisions, external services, or content that only you can 
   - File: `site/src/app/page.tsx:5-10`
   - **Completed:** Updated to real metrics (18+ Years Experience, 10+ Projects Delivered, 5+ Happy Clients, 100% Custom Built)
 
-- [ ] **Only one featured project (Bot-Me.ai)**
-  - File: `site/src/app/page.tsx:166-237`
-  - **Options:**
-    - [ ] Provide 1-2 additional project examples with descriptions
-    - [ ] Provide a real screenshot of Bot-Me.ai
-    - [ ] Keep as-is
-  - **Action needed:** Provide additional projects or screenshot
+- [x] **Only one featured project (Bot-Me.ai)**
+  - **Completed:** Added real Bot-Me.ai screenshots (hero + bot marketplace). Reframed section as "From Our Lab" / "Built In-House" to clearly position as SageMind's own product.
+  - **Date:** 2026-02-13
 
 ## Medium Priority
 
@@ -24,20 +20,13 @@ These issues require decisions, external services, or content that only you can 
   - **Completed:** Verified correct URL is `linkedin.com/company/sagemindai` (no hyphen)
   - Website already uses the correct URL in Footer and Contact page
 
-- [ ] **No testimonials or client logos**
-  - **Options:**
-    - [ ] Provide 2-3 client testimonials (name, company, quote)
-    - [ ] Provide client logos (with permission)
-    - [ ] Skip for now (can add later)
-  - **Action needed:** Provide testimonials/logos if available
+- [x] **No testimonials or client logos**
+  - **Decision:** Skip for now — no client testimonials available yet. Can add later.
+  - **Date:** 2026-02-13
 
-- [ ] **No pricing or engagement model info**
-  - **Options:**
-    - [ ] Provide starting prices or price ranges
-    - [ ] Provide typical project timelines
-    - [ ] Describe engagement model (hourly, fixed, retainer)
-    - [ ] Keep pricing off-site intentionally
-  - **Action needed:** Decide on pricing transparency
+- [x] **No pricing or engagement model info**
+  - **Completed:** Added "Pricing & Engagement" section to Services page with small business starting price ($2,500), custom scoping for AI projects, and three engagement models (fixed, hourly, retainer). Updated FAQ with detailed pricing Q&A.
+  - **Date:** 2026-02-13
 
 ## Low Priority
 
