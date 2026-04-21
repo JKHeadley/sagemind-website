@@ -3,10 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  if (pathname?.startsWith("/for-gregg")) return null;
 
   useEffect(() => {
     const handleScroll = () => {
